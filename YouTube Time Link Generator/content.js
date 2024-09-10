@@ -1,4 +1,4 @@
-// Funkcja konwertujπca sekundy na format h:m:s
+// Funkcja konwertujƒÖca sekundy na format h:m:s
 function convertSecondsToTime(seconds) {
   let hours = Math.floor(seconds / 3600);
   let minutes = Math.floor((seconds % 3600) / 60);
@@ -6,7 +6,7 @@ function convertSecondsToTime(seconds) {
   return `${hours > 0 ? hours + 'h' : ''}${minutes > 0 ? minutes + 'm' : ''}${sec > 0 ? sec + 's' : ''}`;
 }
 
-// Funkcja kopiujπca tekst do schowka bez alertu
+// Funkcja kopiujƒÖca tekst do schowka bez alertu
 function copyToClipboard(text) {
   let tempInput = document.createElement("input");
   tempInput.style = "position: absolute; left: -1000px; top: -1000px";
@@ -50,7 +50,9 @@ function addButton() {
             let video = document.querySelector("video");
             if (video) {
                 let currentTime = video.currentTime;
-                let formattedTime = convertSecondsToTime(currentTime);
+                // Odejmujemy 4 sekundy, zapewniajƒÖc, ≈ºe czas nie jest ujemny
+                let adjustedTime = Math.max(currentTime - 4, 0);
+                let formattedTime = convertSecondsToTime(adjustedTime);
                 let url = new URL(window.location.href);
                 url.searchParams.set("t", formattedTime);
                 let formattedUrl = url.toString();
@@ -61,12 +63,12 @@ function addButton() {
             }
         });
 
-        // Dodajemy przycisk na koÒcu lewych kontrolek
+        // Dodajemy przycisk na ko≈Ñcu lewych kontrolek
         videoPlayer.appendChild(button);
     }
 }
 
-// Obserwator zmian DOM, by upewniÊ siÍ, øe przycisk zostanie dodany nawet po zmianie strony
+// Obserwator zmian DOM, by upewniƒá siƒô, ≈ºe przycisk zostanie dodany nawet po zmianie strony
 let observer = new MutationObserver((mutations) => {
   mutations.forEach((mutation) => {
     if (mutation.type === 'childList') {
@@ -78,5 +80,5 @@ let observer = new MutationObserver((mutations) => {
 // Obserwowanie zmian w strukturze DOM
 observer.observe(document.body, { childList: true, subtree: true });
 
-// Wywo≥aj dodanie przycisku przy ≥adowaniu strony
+// Wywo≈Çaj dodanie przycisku przy ≈Çadowaniu strony
 addButton();
