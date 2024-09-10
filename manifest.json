@@ -1,0 +1,16 @@
+{
+  "manifest_version": 2,
+  "name": "YouTube Time Link Generator",
+  "version": "1.0",
+  "description": "Generates YouTube links with time format of hours:minutes:seconds.",
+  "permissions": [ "activeTab", "tabs" ],
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [ "*://*.youtube.com/*" ],
+      "js": [ "content.js" ]
+    }
+  ]
+}
